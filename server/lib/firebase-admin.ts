@@ -21,12 +21,13 @@ export function initializeFirebaseAdmin() {
   try {
     const serviceAccount = JSON.parse(serviceAccountKey);
 
-    const app = getApps().length > 0
-      ? getApps()[0]
-      : initializeApp({
-          credential: cert(serviceAccount),
-          projectId: serviceAccount.project_id,
-        });
+    const app =
+      getApps().length > 0
+        ? getApps()[0]
+        : initializeApp({
+            credential: cert(serviceAccount),
+            projectId: serviceAccount.project_id,
+          });
 
     adminDb = getFirestore(app);
     adminAuth = getAuth(app);
