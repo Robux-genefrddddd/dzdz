@@ -167,8 +167,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <MaintenanceProvider>
-          <ThemeProvider>
+        <ThemeProvider>
+          <MaintenanceProvider>
             <TOSProvider>
               <Sonner />
               <BrowserRouter
@@ -180,8 +180,8 @@ const App = () => (
                 <AppRoutes />
               </BrowserRouter>
             </TOSProvider>
-          </ThemeProvider>
-        </MaintenanceProvider>
+          </MaintenanceProvider>
+        </ThemeProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
