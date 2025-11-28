@@ -123,7 +123,9 @@ service cloud.firestore {
 
     // ===== SETTINGS (Admin Only via Backend) =====
     match /settings/{document=**} {
-      allow read, write: if false; // Admin only via backend
+      // Allow public read of maintenance status
+      allow read: if document == "maintenance";
+      allow write: if false; // Admin only via backend
     }
 
     // ===== DEFAULT: DENY ALL =====
