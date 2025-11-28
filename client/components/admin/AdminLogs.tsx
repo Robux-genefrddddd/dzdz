@@ -163,9 +163,16 @@ export default function AdminLogs() {
         <p className="text-13px text-white/60">Dernières actions du système</p>
       </div>
 
+      {/* Error State */}
+      {error && (
+        <div className={`${dsClasses.card} p-4 bg-red-500/10 border-red-500/20 text-red-300 text-13px`}>
+          {error}
+        </div>
+      )}
+
       {/* Logs list */}
       <div className="space-y-2">
-        {logs.length === 0 ? (
+        {logs.length === 0 && !error ? (
           <div
             className={`${dsClasses.card} p-4 text-center text-white/60 text-13px`}
           >
