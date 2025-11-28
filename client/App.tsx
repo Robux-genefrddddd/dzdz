@@ -187,10 +187,7 @@ const App = () => (
   </QueryClientProvider>
 );
 
-const rootElement = document.getElementById("root");
-if (rootElement && !rootElement.hasChildNodes()) {
-  createRoot(rootElement).render(<App />);
-} else if (rootElement?.hasChildNodes()) {
-  // HMR - root already exists, just update
-  createRoot(rootElement).render(<App />);
+const rootContainer = document.getElementById("root");
+if (rootContainer) {
+  createRoot(rootContainer).render(<App />);
 }
