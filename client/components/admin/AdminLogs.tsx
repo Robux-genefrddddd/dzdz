@@ -72,11 +72,15 @@ function getActionLabel(action: string, data?: Record<string, any>): string {
 export default function AdminLogs() {
   const [logs, setLogs] = useState<AdminLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchLogs = async () => {
       try {
         setLoading(true);
+        setError(null);
         const currentUser = auth.currentUser;
         if (!currentUser) throw new Error("Non authentifié");
 
@@ -85,7 +89,10 @@ export default function AdminLogs() {
           headers: { Authorization: `Bearer ${idToken}` },
         });
 
-        if (!response.ok) throw new Error("Erreur lors du chargement");
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.message || `Erreur serveur: ${response.status}`);
+        }
 
         const data = await response.json();
         if (data.success && Array.isArray(data.logs)) {
