@@ -82,7 +82,9 @@ export default function AdminStats() {
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.message || `Erreur serveur: ${response.status}`);
+          throw new Error(
+            errorData.message || `Erreur serveur: ${response.status}`,
+          );
         }
 
         const data = await response.json();
@@ -95,7 +97,8 @@ export default function AdminStats() {
         }
       } catch (error) {
         if (!isMounted) return;
-        const errorMsg = error instanceof Error ? error.message : "Erreur lors du chargement";
+        const errorMsg =
+          error instanceof Error ? error.message : "Erreur lors du chargement";
         console.error("Erreur lors du chargement des stats:", error);
         setError(errorMsg);
         setStats(null);
@@ -127,11 +130,7 @@ export default function AdminStats() {
         <p className="text-red-300 text-14px font-medium mb-2">
           Impossible de charger les statistiques
         </p>
-        {error && (
-          <p className="text-red-300/70 text-13px">
-            {error}
-          </p>
-        )}
+        {error && <p className="text-red-300/70 text-13px">{error}</p>}
       </div>
     );
   }

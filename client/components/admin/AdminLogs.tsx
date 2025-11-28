@@ -91,7 +91,9 @@ export default function AdminLogs() {
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.message || `Erreur serveur: ${response.status}`);
+          throw new Error(
+            errorData.message || `Erreur serveur: ${response.status}`,
+          );
         }
 
         const data = await response.json();
@@ -114,7 +116,8 @@ export default function AdminLogs() {
         }
       } catch (error) {
         if (!isMounted) return;
-        const errorMsg = error instanceof Error ? error.message : "Erreur lors du chargement";
+        const errorMsg =
+          error instanceof Error ? error.message : "Erreur lors du chargement";
         console.error("Erreur lors du chargement des logs:", error);
         setError(errorMsg);
         setLogs([]);
@@ -165,7 +168,9 @@ export default function AdminLogs() {
 
       {/* Error State */}
       {error && (
-        <div className={`${dsClasses.card} p-4 bg-red-500/10 border-red-500/20 text-red-300 text-13px`}>
+        <div
+          className={`${dsClasses.card} p-4 bg-red-500/10 border-red-500/20 text-red-300 text-13px`}
+        >
           {error}
         </div>
       )}
